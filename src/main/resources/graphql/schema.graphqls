@@ -1,0 +1,18 @@
+type DynamicEntity {
+    id: ID!
+    type: String!
+    attributes: JSON
+}
+
+scalar JSON
+
+type Query {
+    entity(id: ID!, type: String!): DynamicEntity
+    entities(type: String!): [DynamicEntity]
+}
+
+type Mutation {
+    createEntity(type: String!, attributes: JSON!): DynamicEntity
+    updateEntity(id: ID!, type: String!, attributes: JSON!): DynamicEntity
+    deleteEntity(id: ID!): Boolean
+}
