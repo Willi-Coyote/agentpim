@@ -1,6 +1,6 @@
 # agentpim
 
-Java/Maven project. See `pom.xml` for build and dependencies (Java 17, JUnit 5, AssertJ).
+Java/Maven project. See `pom.xml` for build and dependencies (Java 25, JUnit 5, AssertJ).
 
 ## Testing conventions
 
