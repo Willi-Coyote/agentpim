@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 class AppTest {
 
     @Test
-    void mainRunsWithoutError() {
-        assertThat(new App()).isNotNull();
+    void givenNoArguments_whenAppIsConstructed_thenInstanceIsNotNull() {
+        App app = new App();
+
+        assertThat(app).isNotNull();
     }
 }
