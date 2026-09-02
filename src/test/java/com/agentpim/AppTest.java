@@ -1,6 +1,6 @@
 package com.agentpim;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +8,6 @@ class AppTest {
 
     @Test
     void mainRunsWithoutError() {
-        assertNotNull(new App());
+        assertThat(new App()).isNotNull();
     }
 }
