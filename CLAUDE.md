@@ -2,6 +2,27 @@
 
 Java/Maven project. See `pom.xml` for build and dependencies (Java 25, JUnit 5, AssertJ).
 
+## Module structure
+
+This is a multi-module Maven reactor, deliberately built as hexagonal
+architecture (ports & adapters) from the start:
+
+- **`agentpim-core`** — the hexagon center: the fixed-timestep `Simulation`
+  engine, the `SimulationEntity` interface, and the Dominion ECS integration
+  (`EcsWorld`). Knows nothing about specific unit types (no "aircraft",
+  "F-16", or "tank" in here) and nothing about how entities get defined or
+  controlled from the outside (no JSON, no REST, no MCP).
+- **`agentpim-app`** — the composition root: the runnable entry point that
+  wires adapters into the core and produces the executable jar.
+- Adapter modules are added as they're built, one per external technology
+  (e.g. `agentpim-adapter-json` for JSON-defined unit templates,
+  `agentpim-adapter-rest`, `agentpim-adapter-mcp`). Each depends on
+  `agentpim-core`'s application layer (ports); `agentpim-core` never depends
+  on an adapter.
+- Shared build config (Java version, dependency versions, Checkstyle,
+  plugin versions) lives in the root `pom.xml`; child modules inherit it and
+  only declare what's specific to them.
+
 ## Testing conventions
 
 - Test method names follow **Given-When-Then**, e.g. `givenEmptyList_whenSizeCalled_thenReturnsZero()`.
